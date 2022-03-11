@@ -18,7 +18,7 @@ GenerGrille<-function(){
       grille[j+6,i+6]<-grille[(j-1)%%3+1,(i+1)%%3+1+6]
     }
   }
-  
+
   return(grille)
 }
 
@@ -28,15 +28,43 @@ GenerGrille<-function(){
 existeDansCarre<-function(x, numMat, i, j){
   for(k in 1:3){
     for(n in 1:3){
-      
+
       if(is.na(numMat[3*(i%/%3)+k,3*(j%/%3)+n])==FALSE){
-        if(numMat[3*(i%/%3)+k,3*(j%/%3)+n]==x)  
+        if(numMat[3*(i%/%3)+k,3*(j%/%3)+n]==x)
           return(TRUE)
       }
     }
   }
   return(FALSE)
 }
+deleteNum<-function(a, matrice){
+  matrice[((a-1)%/%9+1),((a-1)%%9+1)]=NA
+  return(matrice)
+}
+facile<-function(matrice){
+  t<-sample(1:81,54,replace = FALSE)
+  q<-matrice
+  for(i in 1:54){
+  q<-deleteNum(t[i],q)
 
+  }
+  return(q)
+}
+moyen<-function(matrice){
+  t<-sample(1:81,59,replace = FALSE)
+  q<-matrice
+  for(i in 1:54){
+    q<-deleteNum(t[i],q)
 
+  }
+  return(q)
+}
+difficile<-function(matrice){
+  t<-sample(1:81,63,replace = FALSE)
+  q<-matrice
+  for(i in 1:54){
+    q<-deleteNum(t[i],q)
 
+  }
+  return(q)
+}
