@@ -30,27 +30,27 @@ deleteNum<-function(a, matrice){
   return(matrice)
 }
 facile<-function(matrice){
-  t<-sample(1:81,44,replace = FALSE)
+  t<-sample(1:81,40,replace = FALSE)
   q<-matrice
-  for(i in 1:44){
+  for(i in 1:40){
   q<-deleteNum(t[i],q)
 
   }
   return(q)
 }
 moyen<-function(matrice){
-  t<-sample(1:81,49,replace = FALSE)
+  t<-sample(1:81,44,replace = FALSE)
   q<-matrice
-  for(i in 1:49){
+  for(i in 1:44){
     q<-deleteNum(t[i],q)
 
   }
   return(q)
 }
 difficile<-function(matrice){
-  t<-sample(1:81,54,replace = FALSE)
+  t<-sample(1:81,49,replace = FALSE)
   q<-matrice
-  for(i in 1:54){
+  for(i in 1:49){
     q<-deleteNum(t[i],q)
 
   }
@@ -137,41 +137,57 @@ existeSurColonne<-function(x, grille, j){
 estValide<-function(x,A,i,j){
   return(!(existeSurColonne(x,A,j) | existeDansCarre(x,A,i,j) | existeSurLigne(x,A,i)))
 }
-SolveGrille<-function(x,grille){
-  for(i in 1:length(x)){
-    if(is.na(grille[((x[i]-1)%/%9+1),((x[i]-1)%%9+1)])){
-    for(j in 1:9){
-      if(estValide(j,grille,((x[i]-1)%/%9+1),((x[i]-1)%%9+1))){
-        grille[((x[i]-1)%/%9+1),((x[i]-1)%%9+1)]=j
-        SolveGrille(x[2:length(x)],grille)
-        grille[((x[i]-1)%/%9+1),((x[i]-1)%%9+1)]<-NA
-      }
-    }
-    return()
-    }
-  }
-  U<-grille
-  return(U)
-}
 
-
-solver<-function(grille){
+checker<-function(grille){
   for(i in 1:9){
     for(j in 1:9){
       if(is.na(grille[i,j])){
-        for(n in 1:9){
-          if(estValide(n,grille,i,j)){
-            grille[i,j]=n
-            solver(grille)
-            grille[i,j]=NA
-          }
-          return()
-          }
-
-
+        return(TRUE)
       }
     }
+
+  }
+  return(FALSE)
+}
+
+soluce<-function(grille,x){
+  a<-1
+  k<-1
+  z<-0
+  while(z<1){
+    i<-((x[a]-1)%/%9+1)
+    j<-((x[a]-1)%%9+1)
+        if(is.na(grille[i,j])){
+          for(n in k:9){
+            if(estValide(n,grille,i,j)){
+              grille[i,j]=n
+              k=n
+              break()
+            }
+          }
+          if(is.na(grille[i,j])){
+          a<-a-1
+          k<-grille[((x[a]-1)%/%9+1),((x[a]-1)%%9+1)]+1
+          grille[((x[a]-1)%/%9+1),((x[a]-1)%%9+1)]=NA
+          while(k>9){
+            a<-a-1
+            k<-grille[((x[a]-1)%/%9+1),((x[a]-1)%%9+1)]+1
+            grille[((x[a]-1)%/%9+1),((x[a]-1)%%9+1)]=NA
+          }
+          }
+          else{
+            k=1
+            a<-a+1
+          }
+        }
+    if(!checker(grille)){
+      z<-10
+    }
+
   }
   return(grille)
 }
+
+
+
 
