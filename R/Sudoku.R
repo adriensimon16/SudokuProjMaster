@@ -30,25 +30,25 @@ deleteNum<-function(a, matrice){
   return(matrice)
 }
 facile<-function(matrice){
-  t<-sample(1:81,54,replace = FALSE)
+  t<-sample(1:81,44,replace = FALSE)
   q<-matrice
-  for(i in 1:54){
+  for(i in 1:44){
   q<-deleteNum(t[i],q)
 
   }
   return(q)
 }
 moyen<-function(matrice){
-  t<-sample(1:81,59,replace = FALSE)
+  t<-sample(1:81,49,replace = FALSE)
   q<-matrice
-  for(i in 1:54){
+  for(i in 1:49){
     q<-deleteNum(t[i],q)
 
   }
   return(q)
 }
 difficile<-function(matrice){
-  t<-sample(1:81,63,replace = FALSE)
+  t<-sample(1:81,54,replace = FALSE)
   q<-matrice
   for(i in 1:54){
     q<-deleteNum(t[i],q)
@@ -137,13 +137,41 @@ existeSurColonne<-function(x, grille, j){
 estValide<-function(x,A,i,j){
   return(!(existeSurColonne(x,A,j) | existeDansCarre(x,A,i,j) | existeSurLigne(x,A,i)))
 }
-SolveGrille<-function(grille){
-  x<-trier(grille)
+SolveGrille<-function(x,grille){
   for(i in 1:length(x)){
-
-
+    if(is.na(grille[((x[i]-1)%/%9+1),((x[i]-1)%%9+1)])){
+    for(j in 1:9){
+      if(estValide(j,grille,((x[i]-1)%/%9+1),((x[i]-1)%%9+1))){
+        grille[((x[i]-1)%/%9+1),((x[i]-1)%%9+1)]=j
+        SolveGrille(x[2:length(x)],grille)
+        grille[((x[i]-1)%/%9+1),((x[i]-1)%%9+1)]<-NA
+      }
+    }
+    return()
+    }
   }
+  U<-grille
+  return(U)
 }
 
 
+solver<-function(grille){
+  for(i in 1:9){
+    for(j in 1:9){
+      if(is.na(grille[i,j])){
+        for(n in 1:9){
+          if(estValide(n,grille,i,j)){
+            grille[i,j]=n
+            solver(grille)
+            grille[i,j]=NA
+          }
+          return()
+          }
+
+
+      }
+    }
+  }
+  return(grille)
+}
 
