@@ -4,7 +4,7 @@ Ce projet a pour but de générer et résoudre des grilles de Sudoku selon trois
 
 un premier niveau facile, un second moyen et un dernier difficile.
 
-Ce projet se présente sous la forme d'une application Shiny. il vous suffit donc d'exécuter le fichier .... que vous trouverez dans le .....pour lancer l'application. 
+Ce projet se présente sous la forme d'une application Shiny. il vous suffit donc d'exécuter le fichier ```Server``` que vous trouverez dans le dossier ```app``` pour lancer l'application. 
 
 Vous pouvez ensuite séléctionner un niveau de difficulté dans le menu déroulant et cliquer sur le bouton résoudre si vous voulez afficher la solution à la grille qui vous est proposée par l'application.
 
