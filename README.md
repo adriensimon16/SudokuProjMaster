@@ -12,7 +12,7 @@ Vous pouvez ensuite séléctionner un niveau de difficulté dans le menu déroul
 
 L'équipe en charge du projet est composée de Assane Sene étudiant en Master 1 SSD à l'université des sciences de Montpellier ainsi que de Adrien Simon, également étudiant de Master 1 SSD à l'université de Montpellier.
 
-A. Sene s'est occupé de la partie rendu de l'application et des fichiers Shiny.
+A. Sene s'est occupé de la partie rendu de l'application et des fichiers Shiny et de la génération de grilles complètes.
 
 A.Simon s'est occupé de la conception de l'algorithme de résolution des grilles incomplètes et de la génération de nouvelles grilles.
 
